@@ -1,0 +1,77 @@
+#:kivy 2.0.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<PolicyScreen>:
+    name: 'policy'
+    md_bg_color: 1, 1, 1, 1
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 0
+        spacing: 0
+
+        MDTopAppBar:
+            title: "Legal Policies"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+            right_action_items: [["shopping-outline", lambda x: print("Cart pressed")]]
+
+        Widget:
+            size_hint_y: None
+            height: '14dp'
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: 0, '16dp'
+                spacing: '16dp'
+
+                MDList:
+                    OneLineRightIconListItem:
+                        text: 'Terms of Use'
+                        on_release: root.open_policy('terms')
+                        IconRightWidget:
+                            icon: 'chevron-right'
+                            on_release: root.open_policy('terms')
+                            
+
+                    OneLineRightIconListItem:
+                        text: 'Privacy Policy'
+                        on_release: root.open_policy('privacy')
+                        IconRightWidget:
+                            icon: 'chevron-right'
+                            on_release: root.open_policy('privacy')
+
+                    OneLineRightIconListItem:
+                        text: 'Affiliate Policy'
+                        on_release: root.open_policy('affiliate')
+                        IconRightWidget:
+                            icon: 'chevron-right'
+                            on_release: root.open_policy('affiliate')
+
+                    OneLineRightIconListItem:
+                        text: 'Infringement Policy'
+                        on_release: root.open_policy('infringement')
+                        IconRightWidget:
+                            icon: 'chevron-right'
+                            on_release: root.open_policy('infringement')
+
+                    OneLineRightIconListItem:
+                        text: 'License'
+                        on_release: root.open_policy('license')
+                        IconRightWidget:
+                            icon: 'chevron-right'
+                            on_release: root.open_policy('license')
+
+                    OneLineRightIconListItem:
+                        text: 'Return Policy'
+                        on_release: root.open_policy('return')
+                        IconRightWidget:
+                            icon: 'chevron-right'
+                            on_release: root.open_policy('return')
+
+      

@@ -1,0 +1,30 @@
+#:kivy 2.0.0
+
+<WishlistScreen>:
+    name: 'wishlist'
+    md_bg_color: 0.98, 0.98, 0.98, 1
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 0
+        spacing: 0
+
+        MDTopAppBar:
+            title: "Wishlist"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+            right_action_items: [["shopping-outline", lambda x: root.open_cart()]]
+
+        # Wishlist Product Grid
+        ScrollView:
+            do_scroll_x: False
+            MDGridLayout:
+                id: wishlist_grid
+                cols: 2
+                spacing: '8dp'
+                padding: '8dp', '8dp', '8dp', '8dp'
+                size_hint_y: None
+                height: self.minimum_height
+                # Wishlist items will be dynamically added here 

@@ -1,0 +1,397 @@
+#:kivy 2.0.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<ClickableRow>:
+    size_hint_y: None
+    height: '48dp'
+    padding: '8dp'
+    spacing: '16dp'
+
+<ProfileScreen>:
+    md_bg_color: 1, 1, 1, 1
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDTopAppBar:
+            md_bg_color: 1, 1, 1, 1
+            elevation: 0
+            MDBoxLayout:
+                adaptive_height: True
+                pos_hint: {'center_y': 0.5}
+                padding: [12, 0, 12, 0]
+                MDCard:
+                    radius: [36, 36, 36, 36]
+                    size_hint: None, None
+                    size: "56dp", "56dp"
+                    md_bg_color: 1, 1, 1, 1
+                    elevation: 0
+                    Image:
+                        source: root.avatar_source
+                        allow_stretch: True
+                        keep_ratio: True
+                Widget:
+                    size_hint_x: None
+                    width: '16dp'
+                MDLabel:
+                    text: f"Hello, {root.current_name.split(' ')[0]}!" if root.current_name else "Hello, there!"
+                    font_style: 'H6'
+                    valign: 'middle'
+                Widget:
+                MDIconButton:
+                    icon: 'shopping-outline'
+                    badge_icon: "numeric-3"
+                    on_release: root.go_to_cart()
+                    
+        
+        ScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: '16dp'
+                spacing: '24dp'
+
+                MDCard:
+                    size_hint_x: 1
+                    adaptive_height: True
+                    padding: '12dp'
+                    radius: [24, 24, 24, 24]
+                    md_bg_color: get_color_from_hex("#F4F8EC")
+                    elevation: 0
+                    MDGridLayout:
+                        cols: 2
+                        spacing: '10dp'
+                        adaptive_height: True
+                        padding: '8dp'
+                        MDFillRoundFlatButton:
+                            text: "Your Order"
+                            text_color: 1, 1, 1, 1
+                            md_bg_color: get_color_from_hex("#61B15A")
+                            size_hint: 1, None
+                            height: "45dp"
+                            on_release: root.go_to_orders()
+                        MDFillRoundFlatButton:
+                            text: "Wishlist"
+                            text_color: 1, 1, 1, 1
+                            md_bg_color: get_color_from_hex("#61B15A")
+                            size_hint: 1, None
+                            height: "45dp"
+                            on_release: root.go_to_wishlist()
+                        MDFillRoundFlatButton:
+                            text: "Edit Profile"
+                            text_color: 1, 1, 1, 1
+                            md_bg_color: get_color_from_hex("#61B15A")
+                            size_hint: 1, None
+                            height: "45dp"
+                            on_release: root.go_to_edit_profile()
+                        MDFillRoundFlatButton:
+                            text: "Help Center"
+                            text_color: 1, 1, 1, 1
+                            md_bg_color: get_color_from_hex("#61B15A")
+                            size_hint: 1, None
+                            height: "45dp"
+                            on_release: root.go_to_help_center()
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    adaptive_height: True
+                    spacing: '8dp'
+                    MDLabel:
+                        text: "Account Settings"
+                        font_style: 'H6'
+                        bold: True
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        padding: [8, 0, 0, 0]
+                    MDCard:
+                        adaptive_height: True
+                        padding: '12dp'
+                        radius: [18, 18, 18, 18]
+                        md_bg_color: get_color_from_hex("#F4F8EC")
+                        elevation: 0
+                        MDList:
+                            ClickableRow:
+                                on_release: root.go_to_cards()
+                                MDIcon:
+                                    icon: "credit-card-outline"
+                                    pos_hint: {'center_y': 0.5}
+                                MDLabel:
+                                    text: "Saved Credit / Debit Card"
+                                    valign: 'middle'
+                            ClickableRow:
+                                on_release: root.go_to_addresses()
+                                MDIcon:
+                                    icon: "map-marker-outline"
+                                    pos_hint: {'center_y': 0.5}
+                                MDLabel:
+                                    text: "Saved Address"
+                                    valign: 'middle'
+                            ClickableRow:
+                                on_release: root.go_to_notification_settings()
+                                MDIcon:
+                                    icon: "bell-outline"
+                                    pos_hint: {'center_y': 0.5}
+                                MDLabel:
+                                    text: "Notification"
+                                    valign: 'middle'
+                            ClickableRow:
+                                on_release: root.go_to_privacy_center()
+                                MDIcon:
+                                    icon: "shield-lock-outline"
+                                    pos_hint: {'center_y': 0.5}
+                                MDLabel:
+                                    text: "Privacy Centre"
+                                    valign: 'middle'
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    adaptive_height: True
+                    spacing: '8dp'
+                    MDLabel:
+                        text: "Feedback & Information"
+                        font_style: 'H6'
+                        bold: True
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        padding: [8, 0, 0, 0]
+                    MDCard:
+                        adaptive_height: True
+                        padding: '12dp'
+                        radius: [18, 18, 18, 18]
+                        md_bg_color: get_color_from_hex("#F4F8EC")
+                        elevation: 0
+                        MDList:
+                            ClickableRow:
+                                on_release: root.go_to_terms()
+                                MDIcon:
+                                    icon: "file-document-outline"
+                                    pos_hint: {'center_y': 0.5}
+                                MDLabel:
+                                    text: "Terms & Policy"
+                                    valign: 'middle'
+                            ClickableRow:
+                                on_release: root.go_to_faq()
+                                MDIcon:
+                                    icon: "help-circle-outline"
+                                    pos_hint: {'center_y': 0.5}
+                                MDLabel:
+                                    text: "Browse FAQ's"
+                                    valign: 'middle'
+
+                MDFillRoundFlatButton:
+                    text: "Log out"
+                    md_bg_color: get_color_from_hex("#61B15A")
+                    size_hint_x: 1
+                    size_hint_y: None
+                    height: '48dp'
+                    on_release: root.log_out()
+
+        # Bottom navigation bar
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "70dp"
+            padding: "0dp", "0dp", "0dp", "10dp"
+            spacing: "0dp"
+            md_bg_color: 1, 1, 1, 1
+            canvas.before:
+                Color:
+                    rgba: 0.9, 0.9, 0.9, 1
+                Rectangle:
+                    pos: self.x, self.top - 1
+                    size: self.width, 1
+
+            Widget:
+                size_hint_x: 2
+
+            MDIconButton:
+                icon: "home-outline"
+                theme_text_color: "Custom"
+                text_color: (0.2, 0.8, 0.2, 1) if root.active_tab == "home" else (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("home")
+
+            Widget:
+                size_hint_x: 3
+
+            MDIconButton:
+                icon: "format-list-bulleted"
+                theme_text_color: "Custom"
+                text_color: (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("list")
+
+            Widget:
+                size_hint_x: 3
+
+            MDIconButton:
+                icon: "account-outline"
+                theme_text_color: "Custom"
+                text_color: (0.2, 0.8, 0.2, 1) if root.active_tab == "profile" else (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("profile")
+
+            Widget:
+                size_hint_x: 2
+
+<AccountPromptScreen>:
+    name: 'account_prompt'
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: [18, 18, 18, 18]
+                spacing: '18dp'
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Account prompt
+                MDCard:
+                    orientation: 'vertical'
+                    padding: [24, 24, 24, 24]
+                    size_hint_x: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    radius: [24, 24, 24, 24]
+                    elevation: 12
+                    md_bg_color: 1, 1, 1, 0.7
+                    shadow_color: 0.5, 0.5, 0.5, 0.10
+                    MDLabel:
+                        text: 'Account'
+                        font_style: 'H5'
+                        bold: True
+                        size_hint_y: None
+                        height: self.texture_size[1] + dp(8)
+                        halign: 'left'
+                    MDLabel:
+                        text: 'Log in to get exclusive offers'
+                        font_style: 'Body1'
+                        size_hint_y: None
+                        height: self.texture_size[1] + dp(8)
+                        halign: 'left'
+                    MDRaisedButton:
+                        text: 'Log In'
+                        pos_hint: {'right': 1}
+                        size_hint: None, None
+                        size: '100dp', '36dp'
+                        on_release: root.go_to_login()
+
+
+                # Feedback & Information Section
+                MDLabel:
+                    text: 'Feedback & Information'
+                    font_style: 'H6'
+                    bold: True
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(16)
+                    padding: [16, 0, 0, 0]
+                    halign: 'left'
+                MDCard:
+                    orientation: 'vertical'
+                    padding: [0, 0, 0, 0]
+                    size_hint_x: 1
+                    size_hint_y: None
+                    height: '110dp'
+                    radius: [20, 20, 20, 20]
+                    elevation: 8
+                    md_bg_color: 1, 1, 1, 0.8
+                    shadow_color: 0.5, 0.5, 0.5, 0.10
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing: '0dp'
+                        ClickableRow:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: '48dp'
+                            padding: [16, 0, 16, 0]
+                            spacing: '12dp'
+                            on_release: root.go_to_terms()
+                            MDIcon:
+                                icon: 'file-document-outline'
+                                theme_text_color: 'Primary'
+                                pos_hint: {'center_y': 0.5}
+                            MDLabel:
+                                text: 'Terms, Policies and Licenses'
+                                theme_text_color: 'Primary'
+                                font_size: '16sp'
+                                valign: 'middle'
+                                pos_hint: {'center_y': 0.5}
+                            MDIcon:
+                                icon: 'chevron-right'
+                                theme_text_color: 'Hint'
+                                pos_hint: {'center_y': 0.5}
+                        Widget:
+                            size_hint_y: None
+                            height: '4dp'
+                        ClickableRow:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: '48dp'
+                            padding: [16, 0, 16, 0]
+                            spacing: '12dp'
+                            on_release: root.go_to_faqs()
+                            MDIcon:
+                                icon: 'help-circle-outline'
+                                theme_text_color: 'Primary'
+                                pos_hint: {'center_y': 0.5}
+                            MDLabel:
+                                text: 'Browse FAQs'
+                                theme_text_color: 'Primary'
+                                font_size: '16sp'
+                                valign: 'middle'
+                                pos_hint: {'center_y': 0.5}
+                            MDIcon:
+                                icon: 'chevron-right'
+                                theme_text_color: 'Hint'
+                                pos_hint: {'center_y': 0.5}
+
+                Widget:
+                    size_hint_y: 1
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "70dp"
+            padding: "0dp", "0dp", "0dp", "10dp"
+            spacing: "0dp"
+            md_bg_color: 1, 1, 1, 1
+            canvas.before:
+                Color:
+                    rgba: 0.9, 0.9, 0.9, 1
+                Rectangle:
+                    pos: self.x, self.top - 1
+                    size: self.width, 1
+            Widget:
+                size_hint_x: 2
+            MDIconButton:
+                icon: "home-outline"
+                theme_text_color: "Custom"
+                text_color: (0.2, 0.8, 0.2, 1) if root.active_tab == "home" else (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("home")
+
+            Widget:
+                size_hint_x: 3
+
+            MDIconButton:
+                icon: "format-list-bulleted"
+                theme_text_color: "Custom"
+                text_color: (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("list")
+            
+            Widget:
+                size_hint_x: 3
+
+            MDIconButton:
+                icon: "account-outline"
+                theme_text_color: "Custom"
+                text_color: (0.2, 0.8, 0.2, 1) if root.active_tab == "profile" else (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("profile")
+            Widget:
+                size_hint_x: 2

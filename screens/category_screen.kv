@@ -1,0 +1,154 @@
+#:kivy 2.1.0
+
+<CategoryScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            # Sidebar
+            ScrollView:
+                size_hint_x: 0.38
+                do_scroll_x: False
+                do_scroll_y: True
+                BoxLayout:
+                    id: sidebar_layout
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 0
+            # Vertical Separator
+            BoxLayout:
+                size_hint_x: 0.01
+                canvas.before:
+                    Color:
+                        rgba: 0.8, 0.8, 0.8, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            # Main content
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 10, 20, 10, 20
+                spacing: 18
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                # Category Title Row
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 40
+                    Label:
+                        text: '[b]' + root.current_category + '[/b]' if root.current_category else ''
+                        markup: True
+                        font_size: 22
+                        color: 0,0,0,1
+                        halign: 'center'
+                        valign: 'middle'
+                        size_hint_x: 1
+                        text_size: self.size
+                    Widget:
+                # Product Grid
+                ScrollView:
+                    do_scroll_x: False
+                    GridLayout:
+                        id: product_grid
+                        cols: 2
+                        spacing: 10
+                        size_hint_y: None
+                        height: self.minimum_height
+        # Bottom Navigation Bar
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "70dp"
+            padding: "0dp", "0dp", "0dp", "10dp"
+            spacing: "0dp"
+            md_bg_color: 1, 1, 1, 1
+            canvas.before:
+                Color:
+                    rgba: 0.9, 0.9, 0.9, 1
+                Rectangle:
+                    pos: self.x, self.top - 1
+                    size: self.width, 1
+
+            Widget:
+                size_hint_x: 2
+
+            MDIconButton:
+                icon: "home-outline"
+                theme_text_color: "Custom"
+                text_color: (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("home")
+
+            Widget:
+                size_hint_x: 3
+
+            MDIconButton:
+                icon: "format-list-bulleted"
+                theme_text_color: "Custom"
+                text_color: (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("list")
+
+            Widget:
+                size_hint_x: 3
+
+            MDIconButton:
+                icon: "account-outline"
+                theme_text_color: "Custom"
+                text_color: (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("profile")
+
+            Widget:
+                size_hint_x: 2 
+
+<CategoryProductCard@ButtonBehavior+BoxLayout>:
+    image: ""
+    name: ""
+    orientation: 'vertical'
+    size_hint_y: None
+    height: dp(180)
+    padding: dp(4)
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.9, 0.9, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [8]
+        Color:
+            rgba: 0.7, 0.7, 0.7, 1
+        Line:
+            width: 1.2
+            rounded_rectangle: (*self.pos, *self.size, 8)
+    Image:
+        source: root.image
+        allow_stretch: True
+        keep_ratio: True
+        size_hint_y: 0.7
+    BoxLayout:
+        size_hint_y: 0.3
+        padding: 0, dp(2)
+        canvas.before:
+            Color:
+                rgba: 0.85, 0.85, 0.85, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: root.name
+            color: 0, 0, 0, 1
+            font_size: '14sp'
+            bold: True
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size 

@@ -1,0 +1,58 @@
+#:kivy 2.0.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<AddCardScreen>:
+    name: 'add_card'
+    md_bg_color: 1, 1, 1, 1
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "Saved Card"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: setattr(root.manager, 'current', 'saved_cards')]]
+            right_action_items: [["shopping-outline", lambda x: print("Cart pressed")]]
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: "32dp"
+            spacing: "32dp"
+            
+            MDTextField:
+                id: card_number_field
+                hint_text: "Card Number"
+                line_color_normal: 0.8, 0.8, 0.8, 1
+
+            MDTextField:
+                id: expiry_date_field
+                hint_text: "Expiry Date"
+                icon_right: "calendar-month"
+                on_focus: if self.focus: root.show_date_picker()
+                line_color_normal: 0.8, 0.8, 0.8, 1
+
+            MDTextField:
+                id: card_holder_name_field
+                hint_text: "Card Holder Name"
+                line_color_normal: 0.8, 0.8, 0.8, 1
+
+            Widget:
+                size_hint_y: 1
+
+            MDLabel:
+                text: "Fill the correct details and save"
+                halign: "center"
+                theme_text_color: "Hint"
+                
+            MDFillRoundFlatButton:
+                text: "Add Card"
+                pos_hint: {'center_x': 0.5}
+                on_release: root.add_card()
+                md_bg_color: get_color_from_hex("#61B15A")
+                text_color: 1, 1, 1, 1
+                size_hint_x: 0.8
+                padding: "12dp"
+        Widget:
+            size_hint_y: 0.1 

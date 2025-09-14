@@ -1,0 +1,120 @@
+#:kivy 2.0.0
+
+<HelpCenterScreen>:
+    name: 'help_center'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: '0dp'
+        spacing: '0dp'
+        
+        # Header
+        BoxLayout:
+            size_hint_y: None
+            height: '56dp'
+            padding: '0dp', '0dp', '0dp', '0dp'
+            spacing: '0dp'
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                size_hint_x: None
+                width: '56dp'
+                background_normal: ''
+                background_color: 0,0,0,0
+                text: '<'
+                color: 0, 0, 0, 1
+                font_size: '24sp'
+                on_release: app.root.current = 'profile'
+            Label:
+                text: 'Help & Support'
+                font_size: '20sp'
+                bold: True
+                color: 0, 0, 0, 1
+                halign: 'left'
+                valign: 'middle'
+            Widget:
+                size_hint_x: None
+                width: '56dp'
+        
+        # Main Content
+        BoxLayout:
+            orientation: 'vertical'
+            padding: '24dp'
+            spacing: '16dp'
+            
+            # Intro
+            Label:
+                text: "We're here to help you with anything and everything on THAIVEEDU"
+                font_size: '18sp'
+                bold: True
+                color: 0.1, 0.1, 0.1, 1
+                size_hint_y: None
+                height: self.texture_size[1] + dp(8)
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.width, None
+            Label:
+                text: "At THAIVEEDU everything we expect at a day's start is you, better and happier than yesterday. We have got you covered. Share your concern or check our frequently asked questions listed below."
+                font_size: '14sp'
+                color: 0.3, 0.3, 0.3, 1
+                size_hint_y: None
+                height: self.texture_size[1] + dp(8)
+                halign: 'left'
+                valign: 'top'
+                text_size: self.width, None
+            
+            # Search Bar
+            BoxLayout:
+                size_hint_y: None
+                height: '44dp'
+                spacing: '8dp'
+                padding: '0dp'
+                canvas.before:
+                    Color:
+                        rgba: 0.96, 0.96, 0.98, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [22,]
+                TextInput:
+                    id: search_input
+                    hint_text: 'Search help'
+                    background_color: 0,0,0,0
+                    foreground_color: 0,0,0,1
+                    font_size: '15sp'
+                    padding: '16dp', '10dp'
+                    multiline: False
+                    size_hint_x: 1
+                Button:
+                    text: '⁜'
+                    size_hint_x: None
+                    width: '44dp'
+                    background_color: 0,0,0,0
+                    color: 0.5,0.5,0.5,1
+                    font_size: '18sp'
+            
+            # FAQ Title
+            Label:
+                text: 'FAQ'
+                font_size: '15sp'
+                bold: True
+                color: 0.2, 0.2, 0.2, 1
+                size_hint_y: None
+                height: self.texture_size[1] + dp(8)
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.width, None
+            
+            # FAQ Accordion
+            ScrollView:
+                do_scroll_x: False
+                GridLayout:
+                    id: faq_accordion
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: '8dp'
+                    padding: 0,0,0,0 

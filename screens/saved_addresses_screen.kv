@@ -1,0 +1,203 @@
+#:kivy 2.0.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<SavedAddressesScreen>:
+    name: 'saved_addresses'
+    md_bg_color: 1, 1, 1, 1
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 0
+        spacing: 0
+
+        MDTopAppBar:
+            title: "Saved Address"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+            right_action_items: [["shopping-outline", lambda x: print("Cart pressed")]]
+
+        # Stepper/progress indicator
+        MDBoxLayout:
+            id: stepper_box
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '56dp'
+            padding: [0, 8, 0, 8]
+            spacing: '0dp'
+            # Step 1: Address (active)
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.33
+                spacing: '2dp'
+                Widget:
+                    size_hint_y: None
+                    height: '2dp'
+                MDBoxLayout:
+                    size_hint: None, None
+                    size: '32dp', '32dp'
+                    pos_hint: {'center_x': 0.5}
+                    md_bg_color: 0.38, 0.78, 0.35, 1
+                    radius: [6, 6, 6, 6]
+                    padding: 0
+                    MDLabel:
+                        text: '1'
+                        font_style: 'H6'
+                        color: 1, 1, 1, 1
+                        halign: 'center'
+                        valign: 'middle'
+                        size_hint: 1, 1
+                        theme_text_color: 'Custom'
+                MDLabel:
+                    text: 'Address'
+                    font_style: 'Caption'
+                    halign: 'center'
+                    theme_text_color: 'Primary'
+            # Line between steps
+            MDBoxLayout:
+                size_hint_x: 0.05
+                orientation: 'vertical'
+                MDSeparator:
+                    height: '2dp'
+                    color: 0.8, 0.8, 0.8, 1
+                    size_hint_y: None
+            # Step 2: Order Summary (inactive)
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.33
+                spacing: '2dp'
+                Widget:
+                    size_hint_y: None
+                    height: '2dp'
+                MDBoxLayout:
+                    size_hint: None, None
+                    size: '32dp', '32dp'
+                    pos_hint: {'center_x': 0.5}
+                    md_bg_color: 0.9, 0.9, 0.9, 1
+                    radius: [6, 6, 6, 6]
+                    padding: 0
+                    MDLabel:
+                        text: '2'
+                        font_style: 'H6'
+                        color: 0.7, 0.7, 0.7, 1
+                        halign: 'center'
+                        valign: 'middle'
+                        size_hint: 1, 1
+                        theme_text_color: 'Custom'
+                MDLabel:
+                    text: 'Order Summary'
+                    font_style: 'Caption'
+                    halign: 'center'
+                    theme_text_color: 'Hint'
+            # Line between steps
+            MDBoxLayout:
+                size_hint_x: 0.05
+                orientation: 'vertical'
+                MDSeparator:
+                    height: '2dp'
+                    color: 0.8, 0.8, 0.8, 1
+                    size_hint_y: None
+            # Step 3: Payment (inactive)
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.33
+                spacing: '2dp'
+                Widget:
+                    size_hint_y: None
+                    height: '2dp'
+                MDBoxLayout:
+                    size_hint: None, None
+                    size: '32dp', '32dp'
+                    pos_hint: {'center_x': 0.5}
+                    md_bg_color: 0.9, 0.9, 0.9, 1
+                    radius: [6, 6, 6, 6]
+                    padding: 0
+                    MDLabel:
+                        text: '3'
+                        font_style: 'H6'
+                        color: 0.7, 0.7, 0.7, 1
+                        halign: 'center'
+                        valign: 'middle'
+                        size_hint: 1, 1
+                        theme_text_color: 'Custom'
+                MDLabel:
+                    text: 'Payment'
+                    font_style: 'Caption'
+                    halign: 'center'
+                    theme_text_color: 'Hint'
+
+        ScrollView:
+            MDBoxLayout:
+                id: addresses_box
+                orientation: 'vertical'
+                padding: '24dp', '0dp', '24dp', '0dp'
+                spacing: '16dp'
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Example address item (to be dynamically generated in Python)
+                # MDCard:
+                #     orientation: 'vertical'
+                #     padding: '8dp'
+                #     size_hint_y: None
+                #     height: self.minimum_height
+                #     md_bg_color: 1, 1, 1, 1
+                #     elevation: 0
+                #     MDBoxLayout:
+                #         orientation: 'horizontal'
+                #         spacing: '8dp'
+                #         MDLabel:
+                #             text: 'Rajiv Ranjan'
+                #             bold: True
+                #             theme_text_color: 'Custom'
+                #             text_color: 0, 0, 0, 1
+                #         Widget:
+                #         MDIconButton:
+                #             icon: 'pencil-outline'
+                #             theme_text_color: 'Custom'
+                #             icon_color: 0, 0, 0, 1
+                #             on_release: root.edit_address(index)
+                #         MDIconButton:
+                #             icon: 'trash-can-outline'
+                #             theme_text_color: 'Custom'
+                #             icon_color: 1, 0, 0, 1
+                #             on_release: root.delete_address(index)
+                #     MDLabel:
+                #         text: 'Bazar samiti lakhisarai , police line road,\nBihar India 811311\n8514755444'
+                #         theme_text_color: 'Secondary'
+                #         font_style: 'Body2'
+                #         halign: 'left'
+
+        MDBoxLayout:
+            id: confirm_box
+            orientation: 'vertical'
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5}
+            height: self.minimum_height
+            MDFillRoundFlatIconButton:
+                id: confirm_button
+                text: 'Confirm'
+                icon: 'check'
+                md_bg_color: get_color_from_hex("#61B15A")
+                text_color: 1, 1, 1, 1
+                size_hint_x: 1
+                pos_hint: {'center_x': 0.5}
+                height: '48dp'
+                opacity: 0
+                disabled: True
+                on_release: root.confirm_address()
+        Widget:
+            size_hint_y: None
+            height: '10dp'
+        MDFillRoundFlatIconButton:
+            text: 'Add'
+            icon: 'plus'
+            md_bg_color: get_color_from_hex("#61B15A")
+            text_color: 1, 1, 1, 1
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5}
+            height: '48dp'
+            on_release: root.show_add_address_screen()
+        Widget:
+            size_hint_y: None
+            height: '16dp' 

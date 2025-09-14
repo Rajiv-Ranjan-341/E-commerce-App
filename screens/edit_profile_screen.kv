@@ -1,0 +1,62 @@
+#:kivy 2.0.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<EditProfileScreen>:
+    name: 'edit_profile'
+    md_bg_color: get_color_from_hex("#F4F8EC")
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDTopAppBar:
+            title: "Edit Profile"
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: setattr(root.manager, 'current', 'profile')]]
+            md_bg_color: get_color_from_hex("#F4F8EC")
+            specific_text_color: 0.18, 0.18, 0.18, 1
+        ScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: '24dp', '20dp'
+                spacing: '20dp'
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDTextField:
+                    id: first_name_field
+                    hint_text: "First Name"
+
+                MDTextField:
+                    id: last_name_field
+                    hint_text: "Last Name"
+
+                MDTextField:
+                    id: dob_field
+                    hint_text: "Date Of Birth"
+                    icon_right: "calendar-blank"
+                    on_focus: if self.focus: root.show_date_picker()
+
+                MDLabel:
+                    text: "This will be how your name will be displayed in the account section and in reviews"
+                    font_size: '12sp'
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    padding_y: '10dp'
+
+                MDTextField:
+                    id: email_field
+                    hint_text: "Email Address"
+
+                MDTextField:
+                    id: phone_field
+                    hint_text: "Phone No."
+
+                Widget:
+                    size_hint_y: None
+                    height: '24dp'
+
+                MDFillRoundFlatButton:
+                    text: 'Save'
+                    on_release: root.save_profile_changes()
+                    size_hint_x: 1
+                    pos_hint: {'center_x': 0.5}
+                    md_bg_color: get_color_from_hex("#61B15A")

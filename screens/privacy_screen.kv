@@ -1,0 +1,49 @@
+#:kivy 2.0.0
+
+<PrivacyScreen>:
+    name: 'privacy'
+    md_bg_color: 0.98, 0.98, 0.99, 1
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDTopAppBar:
+            title: "Privacy Center"
+            elevation: 8
+            left_action_items: [["arrow-left", lambda x: setattr(root.manager, 'current', 'profile')]]
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0.18, 0.18, 0.18, 1
+        MDCard:
+            orientation: 'vertical'
+            padding: [24, 24, 24, 24]
+            size_hint: 0.92, None
+            height: self.minimum_height
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            radius: [18, 18, 18, 18]
+            elevation: 4
+            md_bg_color: 1, 1, 1, 1
+            MDLabel:
+                text: 'Delete your account'
+                font_style: 'H6'
+                theme_text_color: 'Custom'
+                text_color: 0.8, 0.1, 0.1, 1
+                halign: 'center'
+                size_hint_y: None
+                height: self.texture_size[1] + dp(8)
+            MDLabel:
+                text: 'This action is irreversible. All your data will be permanently deleted.\nAre you sure you want to continue?'
+                font_style: 'Body2'
+                theme_text_color: 'Hint'
+                halign: 'center'
+                size_hint_y: None
+                height: self.texture_size[1] + dp(16)
+        Widget:
+            size_hint_y: 1
+        MDFillRoundFlatButton:
+            text: 'DELETE ACCOUNT'
+            md_bg_color: 1, 0.2, 0.2, 1
+            text_color: 1, 1, 1, 1
+            size_hint_x: 0.92
+            pos_hint: {'center_x': 0.5}
+            on_release: root.delete_account()
+        Widget:
+            size_hint_y: None
+            height: '16dp' 

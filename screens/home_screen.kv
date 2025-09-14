@@ -1,0 +1,323 @@
+#:kivy 2.0.0
+
+<HomeScreen>:
+    name: 'home'
+    md_bg_color: 0.98, 0.98, 0.98, 1
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 0
+        spacing: 0
+
+        # Top bar: Logo (left), Search and Cart (right)
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '56dp'
+            padding: '8dp', '0dp', '8dp', '0dp'
+            spacing: '8dp'
+            Image:
+                source: 'assets/logo.png'
+                size_hint_x: None
+                width: '50dp'
+                allow_stretch: True
+                keep_ratio: True
+                pos_hint: {'center_y': 0.5}
+            Widget:
+                size_hint_x: 1
+            MDIconButton:
+                icon: 'magnify'
+                user_font_size: '28sp'
+                pos_hint: {'center_y': 0.5}
+                on_release: root.open_search() if hasattr(root, 'open_search') else None
+            
+            RelativeLayout:
+                size_hint_x: None
+                width: '40dp'
+                MDIconButton:
+                    icon: 'heart-outline'
+                    user_font_size: '24sp'
+                    pos_hint: {'center_y': 0.5}
+                    on_release: root.open_wishlist() 
+            RelativeLayout:
+                size_hint_x: None
+                width: '40dp'
+                MDIconButton:
+                    icon: 'shopping-outline'
+                    user_font_size: '28sp'
+                    pos_hint: {'center_y': 0.5}
+                    on_release: root.open_cart()
+              
+
+        # Scrollable main content
+        ScrollView:
+            do_scroll_x: False
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Promo Banner
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: '32dp'
+                    md_bg_color: 0.0, 0.6, 0.3, 1
+                    padding: '8dp', '0dp'
+                    MDLabel:
+                        text: 'Get 10% discount on your first purchase'
+                        halign: 'center'
+                        color: 1, 1, 1, 1
+                        font_size: '14sp'
+                        bold: True
+
+                # Image Carousel
+                MDCarousel:
+                    id: promo_carousel
+                    size_hint_y: None
+                    height: '220dp'
+                    Image:
+                        source: 'assets/Banners/banner1.png'
+                        allow_stretch: True
+                        keep_ratio: False
+                    Image:
+                        source: 'assets/Banners/banner2.png'
+                        allow_stretch: True
+                        keep_ratio: False
+                    Image:
+                        source: 'assets/Banners/banner3.png'
+                        allow_stretch: True
+                        keep_ratio: False
+                    Image:
+                        source: 'assets/Banners/banner4.png'
+                        allow_stretch: True
+                        keep_ratio: False
+                    Image:
+                        source: 'assets/Banners/banner5.jpg'
+                        allow_stretch: True
+                        keep_ratio: False
+                    Image:
+                        source: 'assets/Banners/banner6.jpg'
+                        allow_stretch: True
+                        keep_ratio: False
+                    Image:
+                        source: 'assets/Banners/banner7.jpg'
+                        allow_stretch: True
+                        keep_ratio: False
+
+                # NEW ARRIVALS title
+                MDLabel:
+                    text: 'NEW ARRIVALS'
+                    halign: 'left'
+                    font_size: '20sp'
+                    color: 0.1, 0.1, 0.1, 1
+                    bold: True
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(16)
+                    padding_x: '16dp'
+
+                # Product Grid (dynamic)
+                GridLayout:
+                    id: home_product_grid
+                    cols: 2
+                    spacing: '8dp'
+                    padding: '8dp', '0dp', '8dp', '0dp'
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                # Innovation Lab Section
+                MDLabel:
+                    text: 'INNOVATION LAB'
+                    halign: 'left'
+                    font_size: '20sp'
+                    color: 0.1, 0.1, 0.1, 1
+                    bold: True
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(32)
+                    padding_x: '16dp'
+
+                ScrollView:
+                    size_hint_y: None
+                    height: '240dp'
+                    do_scroll_x: True
+                    do_scroll_y: False
+                    bar_width: 0
+
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_x: None
+                        width: self.minimum_width
+                        padding: '16dp', '0dp', '16dp', '16dp'
+                        spacing: '12dp'
+
+                        # Innovation Card 1
+                        MDCard:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: '200dp', '200dp'
+                            padding: '0dp'
+                            radius: [15,]
+                            md_bg_color: 1, 1, 1, 1
+                            Image:
+                                source: 'assets/Innovation Cards/Innovation Card 1.jpeg'
+                                allow_stretch: True
+                                keep_ratio: False
+                                size_hint_y: 1
+                        # Innovation Card 2
+                        MDCard:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: '200dp', '200dp'
+                            padding: '0dp'
+                            radius: [15,]
+                            md_bg_color: 1, 1, 1, 1
+                            Image:
+                                source: 'assets/Innovation Cards/Innovation Card 2.jpeg'
+                                allow_stretch: True
+                                keep_ratio: False
+                                size_hint_y: 1
+                        # Innovation Card 3
+                        MDCard:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: '200dp', '200dp'
+                            padding: '0dp'
+                            radius: [15,]
+                            md_bg_color: 1, 1, 1, 1
+                            Image:
+                                source: 'assets/Innovation Cards/Innovation Card 3.jpeg'
+                                allow_stretch: True
+                                keep_ratio: False
+                                size_hint_y: 1
+
+                # Community Voice Section
+                MDLabel:
+                    text: 'COMMUNITY VOICE'
+                    halign: 'left'
+                    font_size: '20sp'
+                    color: 0.1, 0.1, 0.1, 1
+                    bold: True
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(32)
+                    padding_x: '16dp'
+
+                ScrollView:
+                    size_hint_y: None
+                    height: '180dp'
+                    do_scroll_x: True
+                    do_scroll_y: False
+                    bar_width: 0
+
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_x: None
+                        width: self.minimum_width
+                        padding: '16dp', '0dp', '16dp', '16dp'
+                        spacing: '12dp'
+
+                        # Review Card 1
+                        MDCard:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: '260dp', '150dp'
+                            padding: '16dp'
+                            spacing: '8dp'
+                            radius: [15,]
+                            md_bg_color: 0.95, 0.95, 0.95, 1
+
+                            MDLabel:
+                                text: 'Premlata Tandon'
+                                font_size: '14sp'
+                                bold: True
+                                halign: 'center'
+                                size_hint_y: None
+                                height: self.texture_size[1]
+
+                            MDLabel:
+                                text: 'I have personally loved this store and its high quality merchandise, very reasonably priced, we love shopping here. Only issue I face is most of the time my size is stocked out very soon.'
+                                font_size: '12sp'
+                                halign: 'center'
+                                color: 0.4, 0.4, 0.4, 1
+                                text_size: self.width, None
+                                size_hint_y: 1
+
+                        # Review Card 2
+                        MDCard:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: '260dp', '150dp'
+                            padding: '16dp'
+                            spacing: '8dp'
+                            radius: [15,]
+                            md_bg_color: 0.95, 0.95, 0.95, 1
+
+                            MDLabel:
+                                text: 'Raj K.'
+                                font_size: '14sp'
+                                bold: True
+                                halign: 'center'
+                                size_hint_y: None
+                                height: self.texture_size[1]
+
+                            MDLabel:
+                                text: 'Great products and fast delivery. The free returns policy is a big plus for geeks like me!'
+                                font_size: '12sp'
+                                halign: 'center'
+                                color: 0.4, 0.4, 0.4, 1
+                                text_size: self.width, None
+                                size_hint_y: 1
+
+                Widget:
+                    size_hint_y: None
+                    height: "16dp"
+
+        # Bottom navigation bar
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "70dp"
+            padding: "0dp", "0dp", "0dp", "10dp"
+            spacing: "0dp"
+            md_bg_color: 1, 1, 1, 1
+            canvas.before:
+                Color:
+                    rgba: 0.9, 0.9, 0.9, 1
+                Rectangle:
+                    pos: self.x, self.top - 1
+                    size: self.width, 1
+
+            Widget:
+                size_hint_x: 2
+
+            MDIconButton:
+                icon: "home-outline"
+                theme_text_color: "Custom"
+                text_color: (0.2, 0.8, 0.2, 1) if root.active_tab == "home" else (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("home")
+
+            Widget:
+                size_hint_x: 3
+
+            MDIconButton:
+                icon: "format-list-bulleted"
+                theme_text_color: "Custom"
+                text_color: (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("list")
+
+            Widget:
+                size_hint_x: 3
+
+            MDIconButton:
+                icon: "account-outline"
+                theme_text_color: "Custom"
+                text_color: (0.7, 0.7, 0.7, 1)
+                user_font_size: "36sp"
+                pos_hint: {"center_y": 0.5}
+                on_release: root.switch_tab("profile")
+
+            Widget:
+                size_hint_x: 2 
+                

@@ -1,0 +1,264 @@
+#:kivy 2.0.0
+#:import ProductCard widgets.product_card.ProductCard
+#:import FitImage kivymd.uix.fitimage.FitImage
+#:import DoubleTapCarousel screens.product_details_screen.DoubleTapCarousel
+
+
+<ProductDetailsScreen>:
+    name: "product_details"
+    md_bg_color: 0.98, 0.98, 0.98, 1
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 0
+        spacing: 0
+
+        # Top bar
+        MDTopAppBar:
+            title: "Product Details"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+            right_action_items: [["share-variant", lambda x: root.share_product()]]
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: '16dp'
+                spacing: '16dp'
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Product Image Section
+                MDCard:
+                    size_hint_y: None
+                    height: '450dp'
+                    padding: '0dp'
+                    elevation: 0
+                    radius: [12,]
+                    md_bg_color: 1, 1, 1, 1
+
+                    DoubleTapCarousel:
+                        id: image_carousel
+                        direction: 'right'
+                        loop: True
+                        size_hint: 1, 1
+
+                # Product Info Section
+                MDCard:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: '16dp'
+                    elevation: 0
+                    radius: [12,]
+                    md_bg_color: 1, 1, 1, 1
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing: '12dp'
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        # Product Name and Wishlist Icon
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: '8dp'
+
+                            MDLabel:
+                                text: root.product_name
+                                font_style: "H5"
+                                bold: True
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                size_hint_x: 1
+
+                            MDIconButton:
+                                icon: "heart" if root.is_in_wishlist else "heart-outline"
+                                theme_text_color: "Custom"
+                                text_color: (1, 0, 0, 1) if root.is_in_wishlist else (0.7, 0.7, 0.7, 1)
+                                on_release: root.toggle_wishlist()
+                                size_hint: None, None
+                                size: "32dp", "32dp"
+                                pos_hint: {"center_y": 0.5}
+
+                        # Product Category
+                        MDLabel:
+                            text: "Category: " + root.product_category
+                            theme_text_color: "Secondary"
+                            font_style: "Caption"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+
+                        # Price Section
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: '40dp'
+                            spacing: '8dp'
+
+                            MDLabel:
+                                text: f"₹{root.product_price}"
+                                font_style: "H4"
+                                bold: True
+                                theme_text_color: "Primary"
+                                size_hint_x: 0.5
+
+                            MDLabel:
+                                text: "MRP incl. of all taxes"
+                                font_style: "Caption"
+                                theme_text_color: "Hint"
+                                size_hint_x: 0.5
+
+                        # Rating Section
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: '30dp'
+                            spacing: '8dp'
+
+                            MDIcon:
+                                icon: "star"
+                                theme_text_color: "Custom"
+                                text_color: 1, 0.8, 0, 1
+
+                            MDLabel:
+                                text: "4.5 (128 reviews)"
+                                font_style: "Caption"
+                                theme_text_color: "Secondary"
+
+                            Widget:
+                                size_hint_x: 1
+
+                            MDLabel:
+                                text: "In Stock"
+                                font_style: "Caption"
+                                theme_text_color: "Custom"
+                                text_color: 0, 0.7, 0, 1
+
+                # Product Description Section
+                MDCard:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: '16dp'
+                    elevation: 0
+                    radius: [12,]
+                    md_bg_color: 1, 1, 1, 1
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing: '12dp'
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        MDLabel:
+                            text: "Description"
+                            font_style: "H6"
+                            bold: True
+                            size_hint_y: None
+                            height: self.texture_size[1]
+
+                        MDLabel:
+                            text: root.product_description
+                            theme_text_color: "Secondary"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+
+                # Specifications Section
+                MDCard:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: '16dp'
+                    elevation: 0
+                    radius: [12,]
+                    md_bg_color: 1, 1, 1, 1
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing: '12dp'
+                        size_hint_y: None
+                        height: self.minimum_height
+
+                        MDLabel:
+                            text: "Specifications"
+                            font_style: "H6"
+                            bold: True
+                            size_hint_y: None
+                            height: self.texture_size[1]
+
+                        # Specification Items
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            spacing: '8dp'
+                            size_hint_y: None
+                            height: self.minimum_height
+
+                            MDBoxLayout:
+                                orientation: 'horizontal'
+                                size_hint_y: None
+                                height: '30dp'
+
+                                MDLabel:
+                                    text: "Brand"
+                                    theme_text_color: "Secondary"
+                                    size_hint_x: 0.4
+
+                                MDLabel:
+                                    text: "Natural Care"
+                                    size_hint_x: 0.6
+
+                            MDBoxLayout:
+                                orientation: 'horizontal'
+                                size_hint_y: None
+                                height: '30dp'
+
+                                MDLabel:
+                                    text: "Weight"
+                                    theme_text_color: "Secondary"
+                                    size_hint_x: 0.4
+
+                                MDLabel:
+                                    text: "100ml"
+                                    size_hint_x: 0.6
+
+                            MDBoxLayout:
+                                orientation: 'horizontal'
+                                size_hint_y: None
+                                height: '30dp'
+
+                                MDLabel:
+                                    text: "Shelf Life"
+                                    theme_text_color: "Secondary"
+                                    size_hint_x: 0.4
+
+                                MDLabel:
+                                    text: "24 months"
+                                    size_hint_x: 0.6
+
+                # Bottom spacing
+                Widget:
+                    size_hint_y: None
+                    height: '20dp'
+
+        # Fixed Action Buttons at Bottom
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '60dp'
+            spacing: '12dp'
+            padding: ['16dp', '8dp', '16dp', '8dp']
+            pos_hint: {'bottom': 1}
+
+            MDRaisedButton:
+                text: "ADD TO CART"
+                size_hint_x: 0.7
+                md_bg_color: 0.2, 0.6, 0.2, 1
+                on_release: root.add_to_cart()
+
+            MDRaisedButton:
+                text: "BUY NOW"
+                size_hint_x: 0.3
+                md_bg_color: 0.9, 0.3, 0.1, 1
+                on_release: root.buy_now() 

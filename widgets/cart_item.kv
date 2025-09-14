@@ -1,0 +1,118 @@
+<CartItem>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: self.minimum_height
+    padding: '8dp'
+    spacing: '0dp'
+    md_bg_color: 1, 1, 1, 1
+    radius: [14,]
+    elevation: 4
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        padding: '8dp'
+        spacing: '12dp'
+        size_hint_y: None
+        height: '100dp'
+
+        MDCheckbox:
+            size_hint: None, None
+            size: '28dp', '28dp'
+            pos_hint: {'center_y': 0.5}
+            active: True
+
+        Image:
+            source: root.product_image
+            size_hint: None, None
+            size: '70dp', '70dp'
+            radius: [8,]
+            allow_stretch: True
+            keep_ratio: True
+            pos_hint: {'center_y': 0.5}
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: '2dp'
+            size_hint_x: 0.7
+            size_hint_y: 1
+            padding: [0, 0, 0, 0]
+
+            MDLabel:
+                text: root.product_name
+                font_style: 'Subtitle1'
+                bold: True
+                size_hint_y: None
+                height: self.texture_size[1]
+                color: 0.1, 0.1, 0.1, 1
+                halign: 'left'
+
+            MDLabel:
+                text: 'Oversized T-Shirts'  # Placeholder subtitle
+                font_style: 'Caption'
+                theme_text_color: 'Hint'
+                size_hint_y: None
+                height: self.texture_size[1]
+                halign: 'left'
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                spacing: '8dp'
+                size_hint_y: None
+                height: '24dp'
+
+                MDLabel:
+                    text: f"₹{root.product_price}"
+                    font_style: 'Body1'
+                    theme_text_color: 'Primary'
+                    bold: True
+                    size_hint_x: None
+                    width: '60dp'
+                    halign: 'left'
+                MDLabel:
+                    text: '₹1499'  # Placeholder old price
+                    font_style: 'Caption'
+                    theme_text_color: 'Hint'
+                    strikethrough: True
+                    size_hint_x: None
+                    width: '50dp'
+                    halign: 'left'
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                spacing: '8dp'
+                size_hint_y: None
+                height: '28dp'
+                padding: [0, 0, 0, 0]
+
+                MDRectangleFlatButton:
+                    text: f'Qty: {root.product_quantity}'
+                    size_hint_x: None
+                    width: '80dp'
+                    font_size: '12sp'
+
+        MDIconButton:
+            id: heart_button
+            icon: "heart" if root.is_in_wishlist else "heart-outline"
+            theme_text_color: 'Custom'
+            text_color: 1, 0, 0, 1
+            on_release: root.on_move_to_wishlist(root)
+            pos_hint: {'center_y': 0.5}
+            size_hint_x: None
+            width: '40dp'
+
+        MDIconButton:
+            icon: 'delete-outline'
+            theme_text_color: 'Custom'
+            text_color: 1, 0, 0, 1
+            on_release:
+                print("Trash icon pressed for", root.product_name)
+                root.on_remove(root) if root.on_remove else print("on_remove is None")
+            pos_hint: {'center_y': 0.5}
+            size_hint_x: None
+            width: '40dp'
+
+    MDSeparator:
+        height: '1dp'
+        color: 0.95, 0.95, 0.95, 1
+
+   

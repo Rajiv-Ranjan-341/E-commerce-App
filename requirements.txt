@@ -1,0 +1,7 @@
+kivy==2.1.0
+kivymd==0.104.2
+pillow==9.5.0
+kivy_deps.sdl2_dev==0.8.0
+kivy_deps.glew_dev==0.3.1
+kivy_deps.gstreamer_dev==0.3.3
+kivy_deps.angle_dev==0.3.3 

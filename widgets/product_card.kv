@@ -1,0 +1,66 @@
+#:kivy 2.0.0
+
+<ProductCard>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: '290dp'
+    padding: '8dp'
+    spacing: '4dp'
+    elevation: 0
+    radius: [12,]
+    md_bg_color: 1, 1, 1, 1
+    on_release:
+        print("Card released")  # DEBUG
+        root.on_press_callback() if root.on_press_callback else None
+    RelativeLayout:
+        size_hint_y: None
+        height: self.width  # Make the image area a square
+        padding: '0dp', '0dp', '0dp', '0dp'  # Remove all padding
+        Image:
+            source: root.image
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 1, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        MDIconButton:
+            icon: 'heart' if root.is_favorite else 'heart-outline'
+            user_font_size: '20sp'
+            pos_hint: {'right': 1, 'top': 1}
+            theme_text_color: 'Custom'
+            text_color: (1, 0, 0, 1) if root.is_favorite else (0.7, 0.7, 0.7, 1)
+            md_bg_color: 1, 1, 1, 0
+            on_release: root.toggle_favorite()
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: '8dp', '0dp', '8dp', '8dp'
+        spacing: '0dp'
+        MDLabel:
+            text: root.name
+            font_size: '16sp'
+            halign: 'left'
+            bold: True
+            color: 0.2, 0.2, 0.2, 1
+            size_hint_y: None
+            height: self.texture_size[1]
+        MDLabel:
+            text: root.category
+            font_size: '13sp'
+            halign: 'left'
+            color: 0.5, 0.5, 0.5, 1
+            size_hint_y: None
+            height: self.texture_size[1]
+        MDLabel:
+            text: root.price
+            font_size: '15sp'
+            halign: 'left'
+            bold: True
+            color: 0.2, 0.2, 0.2, 1
+            size_hint_y: None
+            height: self.texture_size[1]
+        MDLabel:
+            text: 'MRP incl. of all taxes'
+            font_size: '11sp'
+            halign: 'left'
+            color: 0.5, 0.5, 0.5, 1
+            size_hint_y: None
+            height: self.texture_size[1] 

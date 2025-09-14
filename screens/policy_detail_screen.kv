@@ -1,0 +1,21 @@
+#:kivy 2.0.0
+
+<PolicyDetailScreen>:
+    name: 'policy_detail'
+    md_bg_color: 1, 1, 1, 1
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDTopAppBar:
+            title: root.policy_title
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+        ScrollView:
+            MDLabel:
+                text: root.policy_text
+                padding: "16dp", "16dp"
+                font_style: "Body1"
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None 

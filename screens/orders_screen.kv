@@ -1,0 +1,102 @@
+#:kivy 2.0.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<OrdersScreen>:
+    name: 'orders'
+    md_bg_color: 1, 1, 1, 1
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 0
+        spacing: 0
+
+        MDTopAppBar:
+            title: "My Order"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+            right_action_items: [["shopping-outline", lambda x: root.open_cart()]]
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "48dp"
+            spacing: "8dp"
+            MDIconButton:
+                icon: "magnify"
+                theme_text_color: "Custom"
+                text_color: 0.3, 0.4, 0.3, 1
+                on_release: root.filter_orders(self.ids.order_search_field.text)
+            MDTextField:
+                id: order_search_field
+                hint_text: "Search order history"
+                mode: "rectangle"
+                size_hint_y: None
+                height: "40dp"
+                background_color: 0,0,0,0
+                fill_color: 0,0,0,0
+                foreground_color: 0.3, 0.4, 0.3, 1
+                hint_text_color: 0.7, 0.7, 0.7, 1
+                line_color_normal: 0,0,0,0
+                line_color_focus: 0,0,0,0
+                font_size: "16sp"
+                multiline: False
+                on_text: root.filter_orders(self.text)
+
+        ScrollView:
+            MDBoxLayout:
+                id: order_list_container
+                orientation: 'vertical'
+                padding: '0dp', '8dp', '0dp', '8dp'
+                spacing: '16dp'
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Example order item (repeat as needed)
+                OrderItem:
+                    product_name: 'Peperomia Flex'
+                MDSeparator:
+                    height: '1dp'
+                OrderItem:
+                    product_name: 'Peperomia Flex'
+                MDSeparator:
+                    height: '1dp'
+                OrderItem:
+                    product_name: 'Peperomia Flex'
+
+<OrderItem@MDBoxLayout>:
+    product_name: ''
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: '100dp'
+    spacing: '12dp'
+    padding: '16dp', '0dp', '16dp', '0dp'
+    MDBoxLayout:
+        size_hint_x: None
+        width: '100dp'
+        MDCard:
+            size_hint: None, None
+            size: '90dp', '90dp'
+            radius: [45, 45, 45, 45]
+            md_bg_color: get_color_from_hex('#D8E3CE')
+            elevation: 0
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: '4dp'
+        padding: '0dp', '16dp', '0dp', '16dp'
+        MDLabel:
+            text: root.product_name
+            font_style: 'H6'
+            theme_text_color: 'Primary'
+            bold: True
+            size_hint_y: None
+            height: self.texture_size[1]
+        Widget:
+            size_hint_y: 1
+        MDLabel:
+            text: 'see more detail'
+            font_style: 'Body2'
+            theme_text_color: 'Custom'
+            text_color: 1, 0.7, 0, 1
+            size_hint_y: None
+            height: self.texture_size[1]
+            bold: True

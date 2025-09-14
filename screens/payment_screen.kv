@@ -1,0 +1,104 @@
+#:kivy 2.0.0
+
+<PaymentScreen>:
+    name: 'payment'
+    md_bg_color: 0.98, 0.98, 0.98, 1
+    upi_mode: False
+    upi_id: ''
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: '16dp'
+        spacing: '24dp'
+
+        MDTopAppBar:
+            title: "Payment"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back_to_order_summary()]]
+
+        Widget:
+            size_hint_y: None
+            height: '32dp'
+
+        MDLabel:
+            text: 'Choose Payment Method'
+            font_style: 'H6'
+            halign: 'center'
+            theme_text_color: 'Primary'
+            size_hint_y: None
+            height: '40dp'
+
+        MDFillRoundFlatButton:
+            text: 'Pay by UPI'
+            md_bg_color: 0.38, 0.78, 0.35, 1
+            text_color: 1, 1, 1, 1
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            height: '56dp'
+            on_release: root.show_upi_card()
+
+        MDFillRoundFlatButton:
+            text: 'Cash on Delivery'
+            md_bg_color: 0.2, 0.2, 0.2, 1
+            text_color: 1, 1, 1, 1
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            height: '56dp'
+            on_release: root.pay_by_cod()
+
+        MDCard:
+            orientation: 'vertical'
+            size_hint_x: 1
+            size_hint_y: None
+            height: self.minimum_height
+            padding: '16dp'
+            elevation: 2
+            radius: [8, 8, 8, 8]
+            md_bg_color: 1, 1, 1, 1
+            opacity: 1 if root.upi_mode else 0
+            disabled: not root.upi_mode
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '32dp'
+                MDLabel:
+                    text: 'Add new UPI ID'
+                    font_style: 'Subtitle1'
+                    color: 0, 0, 0, 1
+                    theme_text_color: 'Custom'
+                Widget:
+                MDLabel:
+                    text: '[ref=how]How to find?[/ref]'
+                    markup: True
+                    font_style: 'Caption'
+                    color: 0.22, 0.45, 0.91, 1
+                    theme_text_color: 'Custom'
+                    on_ref_press: root.show_how_to_find()
+            MDBoxLayout:
+                orientation: 'horizontal'
+                spacing: '8dp'
+                size_hint_y: None
+                height: '40dp'
+                MDTextField:
+                    id: upi_id_input
+                    hint_text: 'Enter your UPI ID'
+                    text: root.upi_id
+                    on_text: root.upi_id = self.text
+                    size_hint_x: 0.7
+                MDRaisedButton:
+                    text: 'Verify'
+                    md_bg_color: 0.22, 0.45, 0.91, 1
+                    text_color: 1, 1, 1, 1
+                    size_hint_x: 0.3
+                    on_release: root.verify_upi()
+            MDFillRoundFlatButton:
+                text: 'Pay'
+                md_bg_color: (0.38, 0.78, 0.35, 1) if root.upi_verified else (0.6, 0.6, 0.6, 1)
+                text_color: 1, 1, 1, 1
+                size_hint_x: 1
+                pos_hint: {'center_x': 0.5}
+                height: '48dp'
+                on_release: root.pay_upi()
+                disabled: not root.upi_verified
+        Widget: 

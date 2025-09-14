@@ -1,0 +1,274 @@
+#:kivy 2.0.0
+<LoginScreen>:
+    name: 'login'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: [32, 32, 32, 32]
+        spacing: '16dp'
+        canvas.before:
+            Color:
+                rgba: 0.98, 0.99, 0.96, 1  # Light background
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            # Leaf image at the bottom center
+            Rectangle:
+                source: 'assets/leaf.png'
+                size: self.width * 0.8, self.height * 0.25
+                pos: self.x + self.width * 0.1, self.y
+    
+        ScrollView:
+            bar_width: 0
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: '16dp'
+                # Back button at the top left
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: '48dp'
+                    Widget:
+                        size_hint_x: None
+                        width: '0dp'
+                    MDIconButton:
+                        icon: 'arrow-left'
+                        user_font_size: '28sp'
+                        md_bg_color: 1, 1, 1, 1
+                        theme_text_color: 'Custom'
+                        text_color: 0.3, 0.3, 0.3, 1
+                        pos_hint: {'center_y': 0.5, 'x': 0}
+                        on_release: root.go_to_account_prompt()
+                    Widget:
+                Image:
+                    source: 'assets/logo3.png'
+                    size_hint: None, None
+                    size: '200dp', '160dp'
+                    pos_hint: {'center_x': 0.5}
+                MDFillRoundFlatButton:
+                    text: 'CONTINUE WITH PHONE NO.'
+                    md_bg_color: 0.36, 0.72, 0.36, 1
+                    size_hint_x: 1
+                    height: '48dp'
+                    font_size: '15sp'
+                    pos_hint: {'center_x': 0.5}
+                    on_release: root.go_to_account_prompt()  # Placeholder
+                MDCard:
+                    size_hint_y: None
+                    height: '48dp'
+                    md_bg_color: 0.98, 0.99, 0.96, 1
+                    elevation: 0
+                    padding: '8dp'
+                    canvas.before:
+                        Color:
+                            rgba: 0.75, 0.75, 0.75, 1
+                        Line:
+                            width: 1
+                            rounded_rectangle: (self.x, self.y, self.width, self.height, 24)
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        spacing: '12dp'
+                        padding: '16dp', 0
+                        Image:
+                            source: 'assets/google_icon.png'
+                            size_hint: None, None
+                            size: '24dp', '24dp'
+                        MDLabel:
+                            text: 'CONTINUE WITH GOOGLE'
+                            halign: 'center'
+                            font_size: '15sp'
+                            theme_text_color: 'Custom'
+                            text_color: 0.3, 0.3, 0.3, 1
+                        Widget:
+                            size_hint_x: None
+                            width: '8dp'
+                MDLabel:
+                    text: 'OR LOG IN WITH EMAIL'
+                    halign: 'center'
+                    font_size: '13sp'
+                    theme_text_color: 'Hint'
+                    bold: True
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(10)
+                MDTextField:
+                    id: login_email
+                    hint_text: 'Enter Your Email'
+                    mode: 'line'
+                    size_hint_x: 1
+                    pos_hint: {'center_x': 0.5}
+                    fill_color: 1, 1, 1, 1
+                MDTextField:
+                    id: login_password
+                    hint_text: 'Password'
+                    mode: 'line'
+                    password: True
+                    size_hint_x: 1
+                    pos_hint: {'center_x': 0.5}
+                    fill_color: 1, 1, 1, 1
+                MDLabel:
+                    text: '[ref=forgot][color=3754db]Forget Password[/color][/ref]'
+                    markup: True
+                    halign: 'right'
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(8)
+                    on_ref_press: root.forgot_password()
+                MDFillRoundFlatButton:
+                    text: 'LOGIN'
+                    md_bg_color: 0.36, 0.72, 0.36, 1
+                    size_hint_x: 1
+                    height: '48dp'
+                    pos_hint: {'center_x': 0.5}
+                    on_release: root.login()
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: '30dp'
+                    spacing: '4dp'
+                    MDLabel:
+                        text: "Don't Have An Account ?"
+                        halign: 'right'
+                        font_size: '14sp'
+                    MDLabel:
+                        text: '[ref=signup][color=3754db]Sign Up[/color][/ref]'
+                        markup: True
+                        halign: 'left'
+                        font_size: '14sp'
+                        on_ref_press: root.switch_to_register()
+                Widget:
+                    size_hint_y: None
+                    height: '20dp'
+
+
+
+<RegisterScreen>:
+    name: 'register'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: [32, 32, 32, 32]
+        spacing: '16dp'
+        canvas.before:
+            Color:
+                rgba: 0.98, 0.99, 0.96, 1  # Light background
+            Rectangle:
+                pos: self.pos
+                size: self.size
+          
+            # Leaf image at the bottom center
+            Rectangle:
+                source: 'assets/leaf.png'
+                size: self.width * 0.8, self.height * 0.25
+                pos: self.x + self.width * 0.1, self.y
+       
+
+        MDLabel:
+            text: 'Create your account'
+            font_style: 'H5'
+            halign: 'center'
+            bold: True
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+            
+        
+
+        MDFillRoundFlatButton:
+            text: 'CONTINUE WITH PHONE NO.'
+            md_bg_color: 0.36, 0.72, 0.36, 1
+            size_hint_x: 1
+            height: '48dp'
+            font_size: '15sp'
+            pos_hint: {'center_x': 0.5}
+            on_release: root.go_to_account_prompt()  # Placeholder
+
+        MDCard:
+            size_hint_y: None
+            height: '48dp'
+            md_bg_color: 0.98, 0.99, 0.96, 1
+            elevation: 0
+            padding: '8dp'
+            canvas.before:
+                Color:
+                    rgba: 0.75, 0.75, 0.75, 1
+                Line:
+                    width: 1
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 24)
+            BoxLayout:
+                orientation: 'horizontal'
+                spacing: '12dp'
+                padding: '16dp', 0
+                Image:
+                    source: 'assets/google_icon.png'
+                    size_hint: None, None
+                    size: '24dp', '24dp'
+                MDLabel:
+                    text: 'CONTINUE WITH GOOGLE'
+                    halign: 'center'
+                    font_size: '15sp'
+                    theme_text_color: 'Custom'
+                    text_color: 0.3, 0.3, 0.3, 1
+                Widget:
+                    size_hint_x: None
+                    width: '8dp'
+        MDLabel:
+            text: 'OR LOG IN WITH EMAIL'
+            halign: 'center'
+            font_size: '13sp'
+            theme_text_color: 'Hint'
+            bold: True
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+
+        MDTextField:
+            id: register_name
+            hint_text: 'Enter Your Full Name'
+            mode: 'line'
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            fill_color: 1, 1, 1, 1
+        MDTextField:
+            id: register_email
+            hint_text: 'Email Address'
+            mode: 'line'
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            fill_color: 1, 1, 1, 1
+        MDTextField:
+            id: register_password
+            hint_text: 'Set Password'
+            mode: 'line'
+            password: True
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            fill_color: 1, 1, 1, 1
+        MDTextField:
+            id: register_confirm_password
+            hint_text: 'Confirm Password'
+            mode: 'line'
+            password: True
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            fill_color: 1, 1, 1, 1
+        MDFillRoundFlatButton:
+            text: 'GET STARTED'
+            md_bg_color: 0.36, 0.72, 0.36, 1
+            size_hint_x: 1
+            height: '48dp'
+            pos_hint: {'center_x': 0.5}
+            font_size: '18sp'
+            on_release: root.register()
+        MDBoxLayout:
+            size_hint_y: None
+            height: '30dp'
+            spacing: '4dp'
+            MDLabel:
+                text: 'Already have an account?'
+                halign: 'right'
+                font_size: '14sp'
+            MDLabel:
+                text: '[ref=signin][color=3754db]Sign In[/color][/ref]'
+                markup: True
+                halign: 'left'
+                font_size: '14sp'
+                on_ref_press: root.switch_to_login()
+        Widget:
+            size_hint_y: None
+            height: '20dp' 

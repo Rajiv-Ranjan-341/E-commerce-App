@@ -1,0 +1,174 @@
+#:kivy 2.0.0
+
+<OrderSummaryScreen>:
+    name: 'order_summary'
+    md_bg_color: 0.98, 0.98, 0.98, 1
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: '16dp'
+        spacing: '12dp'
+
+        MDTopAppBar:
+            title: "Order Summary"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back_to_cart()]]
+
+        # Stepper/progress indicator
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '56dp'
+            padding: [0, 8, 0, 8]
+            spacing: '0dp'
+            # Step 1: Address (done)
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.33
+                spacing: '2dp'
+                Widget:
+                    size_hint_y: None
+                    height: '2dp'
+                MDBoxLayout:
+                    size_hint: None, None
+                    size: '32dp', '32dp'
+                    pos_hint: {'center_x': 0.5}
+                    md_bg_color: 0.38, 0.78, 0.35, 1
+                    radius: [16, 16, 16, 16]
+                    padding: 0
+                    MDLabel:
+                        text: '\u2713'
+                        font_style: 'H6'
+                        color: 1, 1, 1, 1
+                        halign: 'center'
+                        valign: 'middle'
+                        size_hint: 1, 1
+                        theme_text_color: 'Custom'
+                MDLabel:
+                    text: 'Address'
+                    font_style: 'Caption'
+                    halign: 'center'
+                    theme_text_color: 'Primary'
+            # Line between steps
+            MDBoxLayout:
+                size_hint_x: 0.05
+                orientation: 'vertical'
+                MDSeparator:
+                    height: '2dp'
+                    color: 0.8, 0.8, 0.8, 1
+                    size_hint_y: None
+            # Step 2: Order Summary (active)
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.33
+                spacing: '2dp'
+                Widget:
+                    size_hint_y: None
+                    height: '2dp'
+                MDBoxLayout:
+                    size_hint: None, None
+                    size: '32dp', '32dp'
+                    pos_hint: {'center_x': 0.5}
+                    md_bg_color: 0.38, 0.78, 0.35, 1
+                    radius: [6, 6, 6, 6]
+                    padding: 0
+                    MDLabel:
+                        text: '2'
+                        font_style: 'H6'
+                        color: 1, 1, 1, 1
+                        halign: 'center'
+                        valign: 'middle'
+                        size_hint: 1, 1
+                        theme_text_color: 'Custom'
+                MDLabel:
+                    text: 'Order Summary'
+                    font_style: 'Caption'
+                    halign: 'center'
+                    theme_text_color: 'Primary'
+            # Line between steps
+            MDBoxLayout:
+                size_hint_x: 0.05
+                orientation: 'vertical'
+                MDSeparator:
+                    height: '2dp'
+                    color: 0.8, 0.8, 0.8, 1
+                    size_hint_y: None
+            # Step 3: Payment (inactive)
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.33
+                spacing: '2dp'
+                Widget:
+                    size_hint_y: None
+                    height: '2dp'
+                MDBoxLayout:
+                    size_hint: None, None
+                    size: '32dp', '32dp'
+                    pos_hint: {'center_x': 0.5}
+                    md_bg_color: 0.9, 0.9, 0.9, 1
+                    radius: [6, 6, 6, 6]
+                    padding: 0
+                    MDLabel:
+                        text: '3'
+                        font_style: 'H6'
+                        color: 0.7, 0.7, 0.7, 1
+                        halign: 'center'
+                        valign: 'middle'
+                        size_hint: 1, 1
+                        theme_text_color: 'Custom'
+                MDLabel:
+                    text: 'Payment'
+                    font_style: 'Caption'
+                    halign: 'center'
+                    theme_text_color: 'Hint'
+
+        MDLabel:
+            text: "[b]Cart Items[/b]"
+            markup: True
+            font_style: 'Subtitle1'
+            theme_text_color: 'Primary'
+            size_hint_y: None
+            height: '32dp'
+
+        ScrollView:
+            MDBoxLayout:
+                id: summary_cart_box
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: '4dp'
+
+        MDSeparator:
+            height: '1dp'
+
+        MDLabel:
+            id: summary_address_label
+            text: "[b]Shipping Address:[/b]"
+            markup: True
+            font_style: 'Body1'
+            theme_text_color: 'Primary'
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+
+        MDLabel:
+            id: summary_total_label
+            text: "[b]Total:[/b] ₹ 0.00"
+            markup: True
+            font_style: 'H6'
+            theme_text_color: 'Primary'
+            size_hint_y: None
+            height: '32dp'
+
+        Widget:
+            size_hint_y: None
+            height: '12dp'
+
+        MDFillRoundFlatButton:
+            text: 'Place Order'
+            md_bg_color: 0.38, 0.78, 0.35, 1
+            text_color: 1, 1, 1, 1
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            height: '48dp'
+            on_release: root.place_order() 

@@ -1,0 +1,171 @@
+#:kivy 2.0.0
+#:import CartItem widgets.cart_item.CartItem
+
+<CartScreen>:
+    name: 'cart'
+    md_bg_color: 0.98, 0.98, 0.98, 1
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: 0
+
+        MDTopAppBar:
+            title: "Cart"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+            right_action_items: [["heart-outline", lambda x: root.open_wishlist()]]
+
+        MDSeparator:
+            height: '1dp'
+            color: 0.9, 0.9, 0.9, 1
+
+        MDLabel:
+            text: "CART ITEMS"
+            font_style: 'Subtitle2'
+            theme_text_color: 'Hint'
+            halign: 'left'
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+            padding: [16, 0, 0, 0]
+
+        ScrollView:
+            do_scroll_x: False
+            bar_width: dp(4)
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Cart items only
+                MDBoxLayout:
+                    id: cart_items_box
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(10)
+                    padding: [8, 0, 8, 0]
+
+                # Bill section (always after all cart items)
+                MDSeparator:
+                    height: '150dp'
+                    color: 0.95, 0.95, 0.95, 1
+
+                MDCard:
+                    id: bill_box
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    padding: ['16dp', '8dp', '16dp', '8dp']
+                    elevation: 2
+                    md_bg_color: 1, 1, 1, 1
+                    spacing: '6dp'
+                    radius: [12, 12, 12, 12]
+                    pos_hint: {'top': 1}
+
+                    MDLabel:
+                        text: "Price Details (" + str(root.cart_count) + " items)"
+                        font_style: 'Subtitle2'
+                        theme_text_color: 'Primary'
+                        bold: True
+                        halign: 'left'
+                        size_hint_y: None
+                        height: '32dp'
+
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: '32dp'
+                        MDLabel:
+                            text: "Cart Total"
+                            halign: 'left'
+                            size_hint_y: None
+                            height: '32dp'
+                        MDLabel:
+                            id: subtotal_label
+                            text: ""
+                            halign: 'right'
+                            size_hint_y: None
+                            height: '32dp'
+
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: '32dp'
+                        MDLabel:
+                            text: "GST"
+                            halign: 'left'
+                            size_hint_y: None
+                            height: '32dp'
+                        MDLabel:
+                            id: gst_label
+                            text: ""
+                            halign: 'right'
+                            size_hint_y: None
+                            height: '32dp'
+
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: '32dp'
+                        MDLabel:
+                            text: "Shipping Charges"
+                            halign: 'left'
+                            size_hint_y: None
+                            height: '32dp'
+                        MDLabel:
+                            id: shipping_label
+                            text: ""
+                            markup: True
+                            halign: 'right'
+                            size_hint_y: None
+                            height: '32dp'
+
+                    MDSeparator:
+                        height: '1dp'
+                        color: 0.95, 0.95, 0.95, 1
+
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: '32dp'
+                        MDLabel:
+                            text: "[b]Total Amount[/b]"
+                            markup: True
+                            font_style: 'H6'
+                            theme_text_color: 'Primary'
+                            halign: 'left'
+                            size_hint_y: None
+                            height: '32dp'
+                        MDLabel:
+                            id: grand_total_label
+                            text: ""
+                            font_style: 'H6'
+                            theme_text_color: 'Primary'
+                            bold: True
+                            halign: 'right'
+                            size_hint_y: None
+                            height: '32dp'
+
+        MDBoxLayout:
+            id: bottom_bar
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '60dp'
+            padding: ['16dp', '8dp', '16dp', '8dp']
+            md_bg_color: 1, 1, 1, 1
+            elevation: 8
+            spacing: '12dp'
+
+            MDLabel:
+                id: total_label
+                text: ""
+                font_style: 'H6'
+                theme_text_color: 'Primary'
+                bold: True
+                size_hint_x: 0.5
+                halign: 'left'
+
+            MDRaisedButton:
+                text: 'CONTINUE'
+                size_hint_x: 0.5
+                md_bg_color: 1, 0.2, 0.2, 1
+                text_color: 1, 1, 1, 1
+                font_style: 'Button'
+                on_release: root.handle_continue()

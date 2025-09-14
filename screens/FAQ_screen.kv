@@ -1,0 +1,56 @@
+#:kivy 2.0.0
+
+<FAQScreen>:
+    name: 'FAQ'
+    md_bg_color: 1, 1, 1, 1
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "Browse Help"
+            elevation: 0
+            md_bg_color: 1, 1, 1, 1
+            specific_text_color: 0, 0, 0, 1
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+            right_action_items: [["shopping-outline", lambda x: root.open_cart()]]
+
+        MDLabel:
+            text: "SELECT CATEGORY"
+            halign: "center"
+            color: 0.7, 0.7, 0.75, 1
+            font_size: "13sp"
+            bold: False
+            size_hint_y: None
+            height: self.texture_size[1] + dp(16)
+            padding: 0, dp(8)
+
+        ScrollView:
+            MDList:
+                
+
+                OneLineRightIconListItem:
+                    text: 'Delivery related'
+                    on_release: root.open_FAQ('Delivery')
+              
+                        
+                OneLineRightIconListItem:
+                    text: 'Login and my account'
+                    on_release: root.open_FAQ('Account')
+                  
+
+                OneLineRightIconListItem:
+                    text: 'Payment'
+                    on_release: root.open_FAQ('Payment')
+                    
+
+                OneLineRightIconListItem:
+                    text: 'Product related'
+                    on_release: root.open_FAQ('Product')
+               
+
+
+                OneLineRightIconListItem:
+                    text: 'Other related'
+                    on_release: root.open_FAQ('Other')
+                 
